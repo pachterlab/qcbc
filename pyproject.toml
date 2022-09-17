@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qcbc"
+version = "0.0.0"
+authors = [
+  { name="A. Sina Booeshaghi", email="alisina@caltech.edu" },
+]
+description = "Quality Control of BarCodes."
+readme = "README.md"
+license = { file="LICENSE" }
+requires-python = ">=3.7"
+classifiers = [
+    "Environment :: Console",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Topic :: Utilities",
+]
+
+
+
+dependencies = [
+    "numpy==1.21.6"
+]
+
+[project.scripts]
+qcbc = "qcbc:main.main"
+
+[project.urls]
+"Homepage" = "https://github.com/sbooeshaghi/qcbc"
+"Bug Tracker" = "https://github.com/sbooeshaghi/qcbc/issues"
