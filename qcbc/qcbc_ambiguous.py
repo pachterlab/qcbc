@@ -4,6 +4,8 @@ from qcbc.utils import load_bcs, make_ec
 
 logger = logging.getLogger(__name__)
 
+# TODO want to be able to get ambigouos seqs for multiple lengths
+
 
 def setup_ambiguous_args(parser):
     parser_format = parser.add_parser(

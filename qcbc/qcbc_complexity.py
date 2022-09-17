@@ -28,7 +28,13 @@ def validate_complexity_args(parser, args):
 def run_complexity(bc_fn, o):
     bcs, bcs_names = load_bcs(bc_fn)
     bc_len = min([len(i) for i in bcs])
-    print(f"{qcbc_complexity(bc_len):,.0f}")
+
+    n = qcbc_complexity(bc_len)
+    nbcs = len(bcs)
+
+    print(
+        f"{nbcs} out of {n:,.0f} possible unique barcodes representing {nbcs/n*100:,.4f}%"
+    )
     # how many if you impose a hamming distance constrain?
     return True
 
