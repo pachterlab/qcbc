@@ -7,7 +7,7 @@ def setup_pdist_args(parser):
     parser_format = parser.add_parser(
         "pdist",
         description="Compute max barcode pdist",
-        help="Compute max barcode pdist",
+        help="Compute pairwise distance between barcodes",
     )
     parser_format.add_argument("bc_file", help="Barcode file")
     parser_format.add_argument(

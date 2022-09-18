@@ -29,7 +29,7 @@ def setup_ambiguous_args(parser):
         default=None,
     )
     # default value is false
-    parser_format.add_argument("--reverse-complement", action="store_true")
+    parser_format.add_argument("-rc", "--reverse-complement", action="store_true")
     return parser_format
 
 
