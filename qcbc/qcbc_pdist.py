@@ -1,6 +1,7 @@
 # pdist on the sequences, or pdist on the kmers
-from qcbc.utils import rev_c, load_bcs
+from qcbc.utils import rev_c, load_bcs, ham
 import numpy as np
+from collections import defaultdict
 
 
 def setup_pdist_args(parser):
@@ -52,11 +53,40 @@ def qcbc_pdist(bcs, rc=False):
     mat_rc = np.zeros((n_bcs, n_bcs))
     for i in range(len(bcs)):
         for j in range(i, len(bcs)):
-            first = np.array(list(bcs[i]))
-            second = np.array(list(bcs[j]))
-            second_rc = np.array(list(rev_c(bcs[j])))
-            mat[i, j] = (first != second).sum()
-            mat_rc[i, j] = (first != second_rc).sum()
+            mat[i, j] = ham(bcs[i], bcs[j])
+            mat_rc[i, j] = ham(bcs[i], rev_c(bcs[j]))
+
+            # first = np.array(list(bcs[i]))
+            # second = np.array(list(bcs[j]))
+            # second_rc = np.array(list(rev_c(bcs[j])))
+            # mat[i, j] = (first != second).sum()
+            # mat_rc[i, j] = (first != second_rc).sum()
     if rc:
         return mat_rc[np.triu_indices(mat_rc.shape[0], k=1)]
     return mat[np.triu_indices(mat.shape[0], k=1)]
+
+
+# can also do pdist on kmers in the ec, this may be useful (currently not used)
+def cmp_kmers(ecs, rc=False):
+    kmers = list(ecs.keys())
+    ecs = list(ecs.values())
+    d = defaultdict()
+    n = len(kmers)
+    nc = n * (n - 1) // 2
+    checkpoint = nc // 10
+    print(f"Making {nc:,.0f} comparisons")
+    c = 0
+    for i in range(n):
+        for j in range(i + 1, n):
+            c += 1
+            if c % checkpoint == 0:
+                print(f"{c:,.0f}")
+            k1, k2 = kmers[i], kmers[j]
+
+            # if comparing kmer to revc of other kmers
+            if rc:
+                k2 = rev_c(k2)
+
+            dist = ham(k1, k2)
+            d[(kmers[i], kmers[j])] = dist
+    return d
