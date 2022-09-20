@@ -1,11 +1,11 @@
 from qcbc.utils import load_bcs
 
 
-def setup_complexity_args(parser):
+def setup_volume_args(parser):
     parser_format = parser.add_parser(
-        "complexity",
-        description="Compute max barcode complexity",
-        help="Compute max barcode complexity",
+        "volume",
+        description="Compute max barcode volume",
+        help="Compute max barcode volume",
     )
     parser_format.add_argument("bc_file", help="Barcode file")
     parser_format.add_argument(
@@ -18,18 +18,18 @@ def setup_complexity_args(parser):
     return parser_format
 
 
-def validate_complexity_args(parser, args):
+def validate_volume_args(parser, args):
     # if everything is valid the run_format
     fn = args.bc_file
     o = args.o
-    run_complexity(fn, o)
+    run_volume(fn, o)
 
 
-def run_complexity(bc_fn, o):
+def run_volume(bc_fn, o):
     bcs, bcs_names = load_bcs(bc_fn)
     bc_len = min([len(i) for i in bcs])
 
-    n = qcbc_complexity(bc_len)
+    n = qcbc_volume(bc_len)
     nbcs = len(bcs)
 
     print(
@@ -39,6 +39,6 @@ def run_complexity(bc_fn, o):
     return True
 
 
-def qcbc_complexity(min_bc_len):
+def qcbc_volume(min_bc_len):
     max_bcs = 4**min_bc_len
     return max_bcs

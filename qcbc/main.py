@@ -2,7 +2,7 @@ from . import __version__
 import argparse
 import logging
 import sys
-from .qcbc_complexity import setup_complexity_args, validate_complexity_args
+from .qcbc_volume import setup_volume_args, validate_volume_args
 from .qcbc_ambiguous import setup_ambiguous_args, validate_ambiguous_args
 from .qcbc_pdist import setup_pdist_args, validate_pdist_args
 
@@ -30,7 +30,7 @@ def main():
 
     # Setup the arguments for all subcommands
     command_to_parser = {
-        "complexity": setup_complexity_args(subparsers),
+        "volume": setup_volume_args(subparsers),
         "ambiguous": setup_ambiguous_args(subparsers),
         "pdist": setup_pdist_args(subparsers),
     }
@@ -56,7 +56,7 @@ def main():
 
     # Setup validator and runner for all subcommands (validate and run if valid)
     COMMAND_TO_FUNCTION = {
-        "complexity": validate_complexity_args,
+        "volume": validate_volume_args,
         "ambiguous": validate_ambiguous_args,
         "pdist": validate_pdist_args,
     }
