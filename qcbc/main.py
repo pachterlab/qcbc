@@ -7,6 +7,7 @@ from .qcbc_ambiguous import setup_ambiguous_args, validate_ambiguous_args
 from .qcbc_volume import setup_volume_args, validate_volume_args
 from .qcbc_pdist import setup_pdist_args, validate_pdist_args
 from .qcbc_content import setup_content_args, validate_content_args
+from .qcbc_homopolymer import setup_homopolymer_args, validate_homopolymer_args
 
 # Steps to add new subcommands
 # Create qcbc_subcommand.py (create setup_subcmd_args, validate_subcmd_args, run_subcmd in that file)
@@ -36,6 +37,7 @@ def main():
         "ambiguous": setup_ambiguous_args(subparsers),
         "pdist": setup_pdist_args(subparsers),
         "content": setup_content_args(subparsers),
+        "homopolymer": setup_homopolymer_args(subparsers),
     }
 
     # Show help when no arguments are given
@@ -63,6 +65,7 @@ def main():
         "ambiguous": validate_ambiguous_args,
         "pdist": validate_pdist_args,
         "content": validate_content_args,
+        "homopolymer": validate_homopolymer_args,
     }
     COMMAND_TO_FUNCTION[sys.argv[1]](parser, args)
 
