@@ -2,6 +2,8 @@ from qcbc.utils import load_bcs
 from collections import Counter
 import json
 import sys
+from scipy.stats import entropy
+import numpy as np
 
 
 def setup_content_args(parser):
@@ -18,6 +20,8 @@ def setup_content_args(parser):
         type=str,
         default=None,
     )
+    parser_format.add_argument("-f", "--frequency", action="store_true")
+    parser_format.add_argument("-e", "--entropy", action="store_true")
     return parser_format
 
 
@@ -25,10 +29,13 @@ def validate_content_args(parser, args):
     # if everything is valid the run_format
     fn = args.bc_file
     o = args.o
-    run_content(fn, o)
+    frequency = args.frequency
+    ent = args.entropy
+    run_content(fn, o, frequency, ent)
 
 
-def run_content(bcs_fn, o):
+# add -frequency, -entropy
+def run_content(bcs_fn, o, frequency, ent):
     bcs, bcs_names = load_bcs(bcs_fn)
     r = qcbc_content(bcs, bcs_names)
     if o:
@@ -36,13 +43,24 @@ def run_content(bcs_fn, o):
             json.dump(r, f, indent=4)
             sys.exit()
     else:
-        print(json.dumps(r, indent=4))
+        for b in r:
+            if ent:
+                e = entropy(list(b["freq"].values()))
+                print(f"{b['name']}\t{b['seq']}\t{e/np.log2(4):,.2f}")
+            elif frequency:
+                print(
+                    f"{b['name']}\t{b['seq']}\t{','.join(map(str, b['freq'].values()))}"
+                )
+            else:
+                print(
+                    f"{b['name']}\t{b['seq']}\t{','.join(map(str, b['count'].values()))}"
+                )
 
     return True
 
 
 def qcbc_content(bcs, bcs_names):
-    d = {"A": 0, "C": 0, "T": 0, "G": 0}
+    d = {"A": 0, "T": 0, "C": 0, "G": 0}
     r = []
     for b, n in zip(bcs, bcs_names):
         c = Counter(b)

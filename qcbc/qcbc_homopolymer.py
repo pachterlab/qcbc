@@ -37,7 +37,10 @@ def run_homopolymer(bc_fn, o):
             json.dump(r, f, indent=4)
             sys.exit()
     else:
-        print(json.dumps(r, indent=4))
+        for b in r:
+            print(
+                f"{b['name']}\t{b['seq']}\t{','.join(map(str, b['homopolymers'].values()))}"
+            )
 
     return True
 
