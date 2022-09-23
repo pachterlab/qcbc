@@ -10,8 +10,8 @@ logger = logging.getLogger(__name__)
 def setup_ambiguous_args(parser):
     parser_format = parser.add_parser(
         "ambiguous",
-        description="Find ambiguous barcodes by ec",
-        help="Find ambiguous barcodes by ec",
+        description="find barcodes with shared subsequence",
+        help="find barcodes with shared subsequence",
     )
     parser_format.add_argument("bc_file", help="Barcode file")
     parser_format.add_argument(

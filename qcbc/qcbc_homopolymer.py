@@ -6,8 +6,8 @@ import sys
 def setup_homopolymer_args(parser):
     parser_format = parser.add_parser(
         "homopolymer",
-        description="Compute homopolymer distribution",
-        help="Compute homopolymer distribution",
+        description="compute homopolymer distribution",
+        help="compute homopolymer distribution",
     )
     parser_format.add_argument("bc_file", help="Barcode file")
     parser_format.add_argument(

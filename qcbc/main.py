@@ -33,11 +33,11 @@ def main():
 
     # Setup the arguments for all subcommands
     command_to_parser = {
-        "volume": setup_volume_args(subparsers),
         "ambiguous": setup_ambiguous_args(subparsers),
-        "pdist": setup_pdist_args(subparsers),
         "content": setup_content_args(subparsers),
         "homopolymer": setup_homopolymer_args(subparsers),
+        "pdist": setup_pdist_args(subparsers),
+        "volume": setup_volume_args(subparsers),
     }
 
     # Show help when no arguments are given
@@ -61,11 +61,11 @@ def main():
 
     # Setup validator and runner for all subcommands (validate and run if valid)
     COMMAND_TO_FUNCTION = {
-        "volume": validate_volume_args,
         "ambiguous": validate_ambiguous_args,
-        "pdist": validate_pdist_args,
         "content": validate_content_args,
         "homopolymer": validate_homopolymer_args,
+        "pdist": validate_pdist_args,
+        "volume": validate_volume_args,
     }
     COMMAND_TO_FUNCTION[sys.argv[1]](parser, args)
 

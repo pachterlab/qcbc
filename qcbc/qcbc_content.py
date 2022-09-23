@@ -9,8 +9,8 @@ import numpy as np
 def setup_content_args(parser):
     parser_format = parser.add_parser(
         "content",
-        description="Compute max barcode content",
-        help="Compute max barcode content",
+        description="compute base distribution",
+        help="compute base distribution",
     )
     parser_format.add_argument("bc_file", help="Barcode file")
     parser_format.add_argument(

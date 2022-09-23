@@ -4,8 +4,8 @@ from qcbc.utils import load_bcs
 def setup_volume_args(parser):
     parser_format = parser.add_parser(
         "volume",
-        description="Compute max barcode volume",
-        help="Compute max barcode volume",
+        description="compute size of barcode space",
+        help="compute size of barcode space",
     )
     parser_format.add_argument("bc_file", help="Barcode file")
     parser_format.add_argument(

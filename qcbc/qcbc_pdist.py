@@ -7,8 +7,8 @@ from collections import defaultdict
 def setup_pdist_args(parser):
     parser_format = parser.add_parser(
         "pdist",
-        description="Compute max barcode pdist",
-        help="Compute pairwise distance between barcodes",
+        description="compute pairwise distance",
+        help="compute pairwise distance",
     )
     parser_format.add_argument("bc_file", help="Barcode file")
     parser_format.add_argument(
