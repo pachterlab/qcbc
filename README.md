@@ -15,7 +15,7 @@
 
 The development version can be installed with
 ```bash
-pip install git+https://github.com/sbooeshaghi/qcbc
+pip install git+https://github.com/pachterlab/qcbc
 ```
 
 ## Usage
