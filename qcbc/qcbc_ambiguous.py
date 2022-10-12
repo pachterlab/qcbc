@@ -56,14 +56,15 @@ def run_ambiguous(bc_fn, o, l, rc):
     # how many if you impose a hamming distance constrain?
 
     for ec in qcbc_ambiguous(ecs):
-        for k, v in ec.items():
-            if o:
-                with open(o, "w") as f:
+        if o:
+            with open(o, "w") as f:
+                for k, v in ec.items():
                     f.write(f"{k}\t")
                     for i in v[:-1]:
                         f.write(f"{i},")
                     f.write(f"{v[-1]}\n")
-            else:
+        else:
+            for k, v in ec.items():
                 print(f"{k}\t", end="")
                 for i in v[:-1]:
                     print(f"{i},", end="")
