@@ -31,10 +31,15 @@ def run_volume(bc_fn, o):
 
     n = qcbc_volume(bc_len)
     nbcs = len(bcs)
-
-    print(
-        f"{nbcs} out of {n:,.0f} possible unique barcodes representing {nbcs/n*100:,.4f}%"
-    )
+    if o:
+        with open(o, "w") as f:
+            f.write(
+                f"{nbcs} out of {n:,.0f} possible unique barcodes representing {nbcs/n*100:,.4f}%\n"
+            )
+    else:
+        print(
+            f"{nbcs} out of {n:,.0f} possible unique barcodes representing {nbcs/n*100:,.4f}%"
+        )
     # how many if you impose a hamming distance constrain?
     return True
 

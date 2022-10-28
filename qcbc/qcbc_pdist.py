@@ -36,13 +36,23 @@ def run_pdist(bc_fn, o, rc):
     # print(f"{qcbc_pdist(bc_len):,.0f}")
     dists = qcbc_pdist(bcs)
     ridx, cidx = np.triu_indices(len(bcs), k=1)
-    for i, j, d in zip(ridx, cidx, dists):
-        bc1 = bcs[i]
-        bc2 = bcs[j] if not rc else rev_c(bcs[j])
-        bc1_name = bcs_names[i]
-        bc2_name = bcs_names[j] if not rc else bcs_names[j] + "_rc"
+    if o:
+        with open(o, "w") as f:
+            for i, j, d in zip(ridx, cidx, dists):
+                bc1 = bcs[i]
+                bc2 = bcs[j] if not rc else rev_c(bcs[j])
+                bc1_name = bcs_names[i]
+                bc2_name = bcs_names[j] if not rc else bcs_names[j] + "_rc"
 
-        print(bc1, bc1_name, bc2, bc2_name, d, sep="\t")
+                f.write(f"{bc1}\t{bc1_name}\t{bc2}\t{bc2_name}\t{d}\n")
+    else:
+        for i, j, d in zip(ridx, cidx, dists):
+            bc1 = bcs[i]
+            bc2 = bcs[j] if not rc else rev_c(bcs[j])
+            bc1_name = bcs_names[i]
+            bc2_name = bcs_names[j] if not rc else bcs_names[j] + "_rc"
+
+            print(bc1, bc1_name, bc2, bc2_name, d, sep="\t")
     # how many if you impose a hamming distance constrain?
     return True
 

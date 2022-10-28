@@ -1,4 +1,4 @@
-from qcbc.utils import load_bcs
+ from qcbc.utils import load_bcs
 import json
 import sys
 
@@ -6,8 +6,8 @@ import sys
 def setup_homopolymer_args(parser):
     parser_format = parser.add_parser(
         "homopolymer",
-        description="compute homopolymer distribution",
-        help="compute homopolymer distribution",
+        description="compute homopolymer distribution (length > 2)",
+        help="compute homopolymer distribution (length > 2)",
     )
     parser_format.add_argument("bc_file", help="Barcode file")
     parser_format.add_argument(
@@ -29,14 +29,19 @@ def validate_homopolymer_args(parser, args):
 
 def run_homopolymer(bc_fn, o):
     bcs, bcs_names = load_bcs(bc_fn)
-    bc_len = min([len(i) for i in bcs])
+    min_len = min([len(i) for i in bcs])
+    max_len = max([len(i) for i in bcs])
 
     r = qcbc_homopolymer(bcs, bcs_names)
     if o:
         with open(o, "w") as f:
-            json.dump(r, f, indent=4)
-            sys.exit()
+            f.write(f"name\tseq\thomopolymer_length\n")
+            for b in r:
+                f.write(
+                    f"{b['name']}\t{b['seq']}\t{','.join(map(str, b['homopolymers'].values()))}\n"
+                )
     else:
+        print(f"name\tseq\thomopolymer_length\n", end="")
         for b in r:
             print(
                 f"{b['name']}\t{b['seq']}\t{','.join(map(str, b['homopolymers'].values()))}"

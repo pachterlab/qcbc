@@ -1,4 +1,4 @@
-from collections import defaultdict
+qcbc/qcbc_homopolymer.pyfrom collections import defaultdict
 import logging
 from qcbc.utils import load_bcs, make_ec
 
@@ -17,7 +17,7 @@ def setup_ambiguous_args(parser):
     parser_format.add_argument(
         "-l",
         metavar="LENGTH",
-        help=("Length of subsequence"),
+        help=("Length of subsequence (default: shortest barcode)"),
         type=int,
         default=-1,
     )
@@ -38,21 +38,23 @@ def validate_ambiguous_args(parser, args):
     fn = args.bc_file
     o = args.o
     rc = args.reverse_complement
-    l = args.l
-    run_ambiguous(fn, o, l, rc)
+    subseq_l = args.l
+    run_ambiguous(fn, o, subseq_l, rc)
 
 
 # setup variables
-def run_ambiguous(bc_fn, o, l, rc):
+def run_ambiguous(bc_fn, o, subseq_l, rc):
     bcs, bcs_names = load_bcs(bc_fn)
     bc_len = min([len(i) for i in bcs])
     optimal_l = bc_len if bc_len % 2 else bc_len - 1
-    if l < 2 or l > optimal_l:
+    if subseq_l == -1:
+        subseq_l = optimal_l
+    if subseq_l < 2 or subseq_l > optimal_l:
         logger.warning(
-            f"Length of {l} specified with barcode length {bc_len}. Using {optimal_l} instead."
+            f"Length of {subseq_l} specified with barcode length {bc_len}. Using {optimal_l} instead."
         )
-        l = optimal_l
-    ecs = make_ec(bcs, bcs_names, k=l, rc=rc)
+        subseq_l = optimal_l
+    ecs = make_ec(bcs, bcs_names, k=subseq_l, rc=rc)
     # how many if you impose a hamming distance constrain?
 
     for ec in qcbc_ambiguous(ecs):
