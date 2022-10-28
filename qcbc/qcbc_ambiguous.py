@@ -1,4 +1,4 @@
-qcbc/qcbc_homopolymer.pyfrom collections import defaultdict
+from collections import defaultdict
 import logging
 from qcbc.utils import load_bcs, make_ec
 

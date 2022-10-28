@@ -1,4 +1,4 @@
- from qcbc.utils import load_bcs
+from qcbc.utils import load_bcs
 import json
 import sys
 
