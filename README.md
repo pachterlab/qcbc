@@ -13,6 +13,12 @@
 
 ## Installation
 
+The latest release can be installed with
+
+```bash
+pip install qcbc
+```
+
 The development version can be installed with
 ```bash
 pip install git+https://github.com/pachterlab/qcbc
@@ -25,16 +31,16 @@ pip install git+https://github.com/pachterlab/qcbc
 $ qcbc
 usage: qcbc [-h] [--verbose] <CMD> ...
 
-qcbc 0.0.0: Format sequence specification files
+qcbc 0.0.2: Format sequence specification files
 
 positional arguments:
   <CMD>
-    volume     Compute max barcode volume
-    ambiguous  Find ambiguous barcodes by ec
-    pdist      Compute pairwise distance between barcodes
-    content    Compute max barcode content
+    ambiguous  find barcodes with shared subsequence
+    content    compute base distribution (A,T,C,G counts/frequencies)
     homopolymer
-               Compute homopolymer distribution
+               compute homopolymer distribution (length > 2)
+    pdist      compute pairwise distance
+    volume     compute size of barcode space
 ```
 
 Barcode files are expected to contain both the barcode sequence and a name associated with the barcode, separated by a tab. For example
@@ -80,6 +86,7 @@ qcbc content <bc_file>
 #### Examples
 ```
 $ qcbc content -e barcodes.txt
+name	seq	ent
 tag1	AGCAGTTACAG	0.67
 tag2	CTTGTACCCAG	0.67
 ```
@@ -94,6 +101,7 @@ qcbc homopolymer <bc_file>
 #### Examples
 ```
 $ qcbc homopolymer barcodes.txt
+name  seq homopolymer_length
 tag1	AGCAGTTACAG	1,0,0,0,0,0,0,0,0,0
 tag2	CTTGTACCCAG	1,1,0,0,0,0,0,0,0,0
 ```
