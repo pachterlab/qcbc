@@ -1,4 +1,4 @@
-.PHONY : clean build
+.PHONY : clean build upload
 
 clean:
 	rm -rf build
@@ -9,5 +9,7 @@ clean:
 	rm -rf .coverage
 
 build:
-	python setup.py sdist bdist_wheel
+	python -m build --wheel
 
+upload:
+	twine upload dist/*
