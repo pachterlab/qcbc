@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "qcbc"
-version = "0.0.0"
+version = "0.0.1"
 authors = [
   { name="A. Sina Booeshaghi", email="alisina@caltech.edu" },
 ]
@@ -37,6 +37,6 @@ dependencies = [
 qcbc = "qcbc:main.main"
 
 [project.urls]
-"Homepage" = "https://github.com/sbooeshaghi/qcbc"
-"Bug Tracker" = "https://github.com/sbooeshaghi/qcbc/issues"
+"Homepage" = "https://github.com/pachterlab/qcbc"
+"Bug Tracker" = "https://github.com/pachterlab/qcbc/issues"
 
