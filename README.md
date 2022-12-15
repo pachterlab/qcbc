@@ -24,6 +24,8 @@ The development version can be installed with
 pip install git+https://github.com/pachterlab/qcbc
 ```
 
+Run `qcbc` on your own barcode list [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/pachterlab/qcbc/blob/main/tests/qcbc_examples.ipynb)
+
 ## Usage
 `qcbc` consists of four subcommands:
 
