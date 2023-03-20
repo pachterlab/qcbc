@@ -6,11 +6,17 @@ def load_bcs(bcs_fn):
     bcs = []
     bcs_names = []
     with open(bcs_fn, "r") as f:
-        for line in f.readlines():
+        for idx, line in enumerate(f.readlines()):
             l_strip = line.strip()
-            bc, n = l_strip.split("\t")
-            bcs.append(bc)
-            bcs_names.append(n)
+            strip = l_strip.split("\t")
+            if len(strip) > 1:
+                bc, n = strip
+                bcs.append(bc)
+                bcs_names.append(n)
+            else:
+                bc = strip[0]
+                bcs.append(bc)
+                bcs_names.append(f"bc_{idx}")
     return (bcs, bcs_names)
 
 
