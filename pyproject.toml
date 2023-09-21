@@ -29,8 +29,8 @@ classifiers = [
 
 
 dependencies = [
-    "numpy==1.21.6",
-    "scipy==1.7.3"
+    "numpy",
+    "scipy"
 ]
 
 [project.scripts]
